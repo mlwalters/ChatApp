@@ -22,9 +22,9 @@ namespace ChatAppWithAngular.Controllers
 
         [Route("send")]                                           //path looks like this: https://localhost:44379/api/chat/send
         [HttpPost]
-        public IActionResult SendRequest([FromBody] MessageDTO msg)
+        public IActionResult SendRequest([FromBody] MessageDto msg)
         {
-            _hubContext.Clients.All.SendAsync("ReceiveOne", msg.user, msg.msgText);
+            _hubContext.Clients.All.SendAsync("ReceiveOne", msg.User, msg.MsgText);
             return Ok();
         }
     }

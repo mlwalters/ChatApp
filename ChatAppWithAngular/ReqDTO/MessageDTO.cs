@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ChatAppWithAngular.ReqDTO
 {
-    public class MessageDTO             // Data Transfer Object
+    public class MessageDto             // Data Transfer Object
     {
-        public string user { get; set; }
-        public string msgText { get; set; }
+        public string User { get; set; }
+        public string MsgText { get; set; }
     }
 }

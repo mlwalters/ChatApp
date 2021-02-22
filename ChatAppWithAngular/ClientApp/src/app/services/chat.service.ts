@@ -20,10 +20,10 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ChatService {
 
-   private  connection: any = new signalR.HubConnectionBuilder().withUrl("https://localhost:44379/chatsocket")   // mapping to the chathub as in startup.cs
+  private connection: any = new signalR.HubConnectionBuilder().withUrl("https://localhost:44370/chatsocket")   // mapping to the chathub as in startup.cs
                                          .configureLogging(signalR.LogLevel.Information)
                                          .build();
-   readonly POST_URL = "https://localhost:44379/api/chat/send"
+  readonly POST_URL = "https://localhost:44370/api/chat/send"
 
   private receivedMessageObject: MessageDto = new MessageDto();
   private sharedObj = new Subject<MessageDto>();

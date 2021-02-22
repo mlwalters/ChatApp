@@ -1,6 +1,22 @@
-<body>
+<!--<body>
   <app-nav-menu></app-nav-menu>
   <div class="container">
     <router-outlet></router-outlet>
   </div>
-</body>
+</body>-->
+
+<div class="ud-header">
+  <h2 class="text-center">Public Chat</h2>
+</div>
+<div class="ud-body">
+  <div class="msg-box">
+    <ul>
+      <li *ngFor="let mObj of msgInboxArray" [ngClass]="mObj.user === msgDto.user ? 'in-msg' : 'ex-msg'">{{mObj.user}} :<br /><span class="msg-italic-style">{{mObj.msgText}}</span></li>
+    </ul>
+  </div>
+  <div class="ud-flex-row">
+    <input type="text" placeholder="Type message here" class="msg-input" [(ngModel)]="msgDto.msgText" />
+    <button class="send-btn" (click)="send()"><i class="fa fa-paper-plane"></i></button>
+  </div>
+  <input type="text" placeholder="Your name" class="name-box" [(ngModel)]="msgDto.user" />
+</div>

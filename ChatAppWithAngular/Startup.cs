@@ -95,7 +95,7 @@ namespace ChatAppWithAngular
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-                endpoints.MapHub<ChatHub>("/chatsocket");     // path will look like this https://localhost:44379/chatsocket
+                endpoints.MapHub<ChatHub>("/chatsocket");     // path will look like this https://localhost:5000/chatsocket
             });
 
             app.UseSpa(spa =>
