@@ -1,4 +1,5 @@
 using ChatAppWithAngular.Data;
+using ChatAppWithAngular.Hubs;
 using ChatAppWithAngular.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -47,6 +48,16 @@ namespace ChatAppWithAngular
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddSignalR(); // added feb22 for signalR package to enable SignalR service and define an endpoint that is used by clients to listen to this hub
+
+            services.AddCors(options => options.AddPolicy("CorsPolicy",      //added feb 22
+                builder => 
+                {
+                    builder.AllowAnyMethod().AllowAnyHeader()
+                           .WithOrigins("http://localhost:4201")
+                           .AllowCredentials();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,12 +87,15 @@ namespace ChatAppWithAngular
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
+            app.UseCors("CorsPolicy");      // added feb22
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/chatsocket");     // path will look like this https://localhost:44379/chatsocket
             });
 
             app.UseSpa(spa =>
